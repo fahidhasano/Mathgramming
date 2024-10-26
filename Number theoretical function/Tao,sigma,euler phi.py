@@ -32,7 +32,7 @@ for i in range(1,n):
     if coprime(n,i)==True:
         t.append(i)
 
-print("numbers less than and coprime with",n,"are",t,"\nEuler phi of",n,"is",len(t))
+print("Numbers less than and coprime with",n,"are",t,"\nEuler phi of",n,"is",len(t))
 
 
 

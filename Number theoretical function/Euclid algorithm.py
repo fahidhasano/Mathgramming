@@ -22,10 +22,11 @@ def gcd_by_euclidean_algorithm(a,b):
         n2=r
         r=n1%n2
     return n2
+o=int(input("Input 2 numbers"))
+p=int(input())
+x=gcd_by_euclidean_algorithm(o,p)
 
-x=gcd_by_euclidean_algorithm(561,171)
-
-print(x)
+print("Gcd of",o,"and",p,"is",x)
 
 
 
