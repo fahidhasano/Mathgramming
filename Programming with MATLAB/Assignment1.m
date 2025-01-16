@@ -22,6 +22,7 @@ ylabel('y');
 l = legend('e^x','x^2');
 title(l,'plotting');
 %%
+% 3(ii)
 y3=cos(x)
 y4=1-cos(x)
 intersect1=solve([y == cos(x), y==1-cos(x)], [x, y])
