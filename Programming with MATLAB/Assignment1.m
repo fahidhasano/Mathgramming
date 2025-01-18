@@ -1,5 +1,4 @@
 
-
 %%
 %2(b)
 syms t c
@@ -46,6 +45,44 @@ avg_temp=(T(6)-T(0))/(6-0)
 % interpreting the result:
 fprintf('The point c represents the time where the rate of temperature change equals the average rate of change over the interval.\nThis can help monitor when rapid changes in temperature occur,aiding in maintaining stable storage.\nThis will help tweaking temperature when it is mandatory')
 
+
+%%
+%2(c)
+syms t
+P(t)= 50*exp(0.2*t)-10*t^2
+growth_rate=matlabFunction(diff(P(t),t,1))
+acceleration=matlabFunction(diff(P(t),t,2))
+Time_of_maximum_growth=double(solve(diff(P(t),t,1)==0,t))
+Time_of_growth_acceleration=double(solve(diff(P(t),t,2)==0,t))
+for i=1:length(Time_of_maximum_growth)
+    lhl=growth_rate(Time_of_maximum_growth(i)-0.01)
+    rhl=growth_rate(Time_of_maximum_growth(i)+0.01)
+    if lhl>0 && rhl<0
+        fprintf('maximum exist in %f',Time_of_maximum_growth(i))
+    elseif lhl<0 && rhl>0
+        fprintf('minimum exist in %f',Time_of_maximum_growth(i))
+    
+    end
+end
+
+figure
+hold on
+fplot(P(t),[0 10],'r','LineWidth',2);
+hold on
+fplot(growth_rate,[0 10],'b','LineWidth',2);
+fplot(acceleration,[0 10],'k','LineWidth',2);
+scatter(Time_of_maximum_growth,P(Time_of_maximum_growth),'c','filled','d')
+scatter(Time_of_growth_acceleration,P(Time_of_growth_acceleration),'m','filled','d')
+hold off
+grid on
+title('The growth rate of a bacterial colony in a controlled field')
+xlabel('time(in hours)');
+ylabel('size of colony');
+l = legend('function','growth rate','acceleration of growth or decay','maximum point','growth trend','Location','southwest');
+title(l,'graph of modelling')
+
+% Remarks
+fprintf('\nThis analysis helps identify the time period for \n the fastest growth and when growth slows down . \n Conditions like nutrient supply can be provided.\nThis will consequently optimize the peak growth during accelerating phase. ')
 
 %%
 %(3[i])
