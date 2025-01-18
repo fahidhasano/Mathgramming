@@ -1,3 +1,71 @@
+%%
+%1
+syms x
+f(x)=sin(x)/x
+g(x)=log(x+1)/x+1
+limf=limit(f(x),x,0) 
+limg=limit(g(x),x,0) 
+figure
+fplot(f(x),[-10 10],'b')
+hold on
+fplot(g(x),[-10 10],'r')
+scatter(limf,f(limf),'r','filled')
+scatter(limg,g(limg),'k','filled')
+hold off
+grid on
+title('graphs of f(x) and g(x)')
+xlabel('x');
+ylabel('functions(x)');
+l = legend('f(x)','g(x)','limit of f(x)','limit of g(x)');
+title(l,'brief description')
+%%
+%2(a)
+syms x c
+func=matlabFunction(6*x^4-12*x^3+8*x^2-4*x);
+first_derivative=matlabFunction(diff(func,x,1));
+second_derivative=matlabFunction(diff(func,x,2));
+%intervals of increasing and decreasing
+extreme_points=double(solve(diff(func,x,1)==0,x));
+inflection_points=double(solve(diff(func,x,2)==0,x));
+%plotting
+figure
+fplot(func,[-2 2],'r','LineWidth',2)
+hold on
+fplot(first_derivative,[-2 2],'b','LineWidth',2)
+fplot(second_derivative,[-2 2],'k','LineWidth',2)
+scatter(inflection_points,func(inflection_points),'r','filled')
+scatter(extreme_points,func(extreme_points),'g','filled')
+hold off
+grid on
+title('graph of the f(x) function and its first and second derivatives ')
+xlabel('time');
+ylabel('population growth ');
+l = legend('f(x)','df(x)/d(x)','d^2(f(x))/dx^2','inflection points','extremas');
+title(l,'Brief description of graph')
+
+%local maxima and minima:
+for i=1:length(extreme_points)
+    left_slope=first_derivative(extreme_points(i)-0.01)
+    right_slope=first_derivative(extreme_points(i)+0.01)
+    if left_slope>0 && right_slope<0
+        fprintf('Local maxima exists at x=%f',extreme_points(i))
+    elseif left_slope<0 && right_slope>0
+        
+        fprintf('Local minima exists at x=%f',extreme_points(i))
+        
+        
+    end
+end
+%concavity checking:
+for i=1:length(inflection_points)
+    left_inflection=second_derivative(inflection_points(i)-0.01)
+    right_inflection=second_derivative(inflection_points(i)+0.01)
+    if left_inflection* right_inflection<0
+        fprintf('concavity exists at x=%f',inflection_points(i))
+    end
+    
+end
+
 
 %%
 %2(b)
@@ -64,7 +132,7 @@ for i=1:length(Time_of_maximum_growth)
     
     end
 end
-
+%plotting
 figure
 hold on
 fplot(P(t),[0 10],'r','LineWidth',2);
@@ -97,6 +165,7 @@ disp(vpa(xi,4))
 %finding the area
 vpa(int(y2-y1,xi(1),xi(2)),4)
 %plotting
+figure
 fplot(y1,[-1 1],'b')
 hold on
 fplot(y2,[-1 1],'r')
@@ -114,8 +183,11 @@ y4=1-cos(x)
 intersect1=solve([y == cos(x), y==1-cos(x)], [x, y])
 x2=intersect1.x
 disp(vpa(x2,4))
+%calculating area
 area=int(y4-y3,x,0,pi)
 disp(vpa(area,4))
+%plotting
+figure
 fplot(y3,[0 pi],'g')
 hold on
 fplot(y4,[0 pi],'k')
