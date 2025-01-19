@@ -76,6 +76,8 @@ a=0
 b=6
 avg_rate=(T(b)-T(a))/(b-a)
 values_of_c=double(solve(first_derivative(c)==avg_rate,c))
+%since T(t) is a polynomial so it is continuous in [0,6] and differentiable in (0,6) so mean value theorem
+%is satisfied
 for i=1:length(values_of_c)
     if a<=values_of_c(i) && b>=values_of_c(i)
         mvc=values_of_c(i)
@@ -87,12 +89,12 @@ secant_line=T(a)+avg_rate*(t-a)
 tangent_line=T(mvc)+avg_rate*(t-mvc)
 %plotting
 figure
-fplot(T,[0 6],'r')
+fplot(T,[0 6],'r','LineWidth',2)
 hold on
-fplot(secant_line,[0 6],'b')
-fplot(tangent_line,[0 6],'k')
+fplot(secant_line,[0 6],'b','LineWidth',2)
+fplot(tangent_line,[0 6],'k','LineWidth',2)
 scatter(mvc,T(mvc),'g','filled')
-scatter([a,b],[T(a),T(b)],'yo','filled')
+scatter([a,b],[T(a),T(b)],'c','filled')
 title('Temperature modelling')
 xlabel('Time in hours')
 ylabel('Temperature')
