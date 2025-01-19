@@ -70,42 +70,33 @@ end
 %%
 %2(b)
 syms t c
-T(t)=-2*t^3+9*t^2-12*t+25
-a=0;
-b=6;
-tan_slope(c)=diff(T(c),c)
-avg_slope=(T(6)-T(0))/(6-0)
-solv=vpa(solve(tan_slope==avg_slope,c),4)
-for i=1:length(solv)
-    if solv(i)>=a && solv(i)<=b
-        
-        mvc=vpa(solv(i),4);
-        disp(mvc)
-    
+T=matlabFunction(-2*t^3+9*t^2-12*t+25)
+first_derivative=matlabFunction(diff(T,t,1))
+a=0
+b=6
+avg_rate=(T(b)-T(a))/(b-a)
+values_of_c=double(solve(first_derivative(c)==avg_rate,c))
+for i=1:length(values_of_c)
+    if a<values_of_c(i) && b>values_of_c(i)
+        mvc=values_of_c(i)
+        fprintf('Mean value theorem is satisfied at c=%f',mvc)
     end
 end
-
-display(['c:',num2str(3.791)])
-%secant line equation :
-values=linspace(a,b,1000)
-sec_line=T(a)+avg_slope*(values-a)
-%tangent line equation:
-tan_line=T(mvc)+tan_slope(mvc)*(values-mvc)
-VALUES=T(values);
+%equations
+secant_line=T(a)+avg_rate*(t-a)
+tangent_line=T(mvc)+avg_rate*(t-mvc)
 %plotting
-
 figure
-hold on;
-
-plot(values,VALUES,'c')
-plot(values,sec_line,'r')
-plot(values,tan_line,'k')
-scatter(mvc,T(mvc),'ko','filled')
+fplot(T,[0 6],'r')
+hold on
+fplot(secant_line,[0 6],'b')
+fplot(tangent_line,[0 6],'k')
+scatter(mvc,T(mvc),'g','filled')
 scatter([a,b],[T(a),T(b)],'yo','filled')
 title('Temperature modelling')
 xlabel('Time in hours')
 ylabel('Temperature')
-l = legend('function','Secant line','Tangent line');
+l = legend('function','Secant line','Tangent line','mean value theorem point','secant line points');
 title(l,'Tracking the temperature changes')
 grid on
 hold off
