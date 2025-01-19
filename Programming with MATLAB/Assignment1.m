@@ -77,7 +77,7 @@ b=6
 avg_rate=(T(b)-T(a))/(b-a)
 values_of_c=double(solve(first_derivative(c)==avg_rate,c))
 for i=1:length(values_of_c)
-    if a<values_of_c(i) && b>values_of_c(i)
+    if a<=values_of_c(i) && b>=values_of_c(i)
         mvc=values_of_c(i)
         fprintf('Mean value theorem is satisfied at c=%f',mvc)
     end
