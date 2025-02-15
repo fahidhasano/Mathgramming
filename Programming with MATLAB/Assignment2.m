@@ -216,6 +216,28 @@ zlabel('z')
 title('maxmin')
 alpha(.5)
 
+
+[X,Y] = meshgrid(-5:.2:5);
+Z = X.*Y.*-4.0+X.^4+Y.^4
+[DX,DY] = gradient(Z,.2,.2);
+
+figure
+C=contour(X,Y,Z)
+hold on
+scatter(xc,yc)
+hold on
+clabel(C)
+hold on
+quiver(X,Y,DX,DY)
+
+title('Gradient vector fields')
+legend('contour','critical points')
+xlabel('x axis')
+ylabel('y axis')
+axis on
+hold off
+
+
 %%
 %3(b)
 syms x y
