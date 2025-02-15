@@ -181,6 +181,7 @@ legend('contour','field','critical point')
 hold off
 
 %%
+%2(ii)
 syms x y
 f(x,y)=x^4-4*x*y+y^4
 fx=diff(f(x,y),x)
