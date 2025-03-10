@@ -2,15 +2,15 @@
 %1
 syms x
 f(x)=sin(x)/x
-g(x)=log(x+1)/x+1
+g(x)=log(x+1)/(x+1)
 limf=limit(f(x),x,0) 
 limg=limit(g(x),x,0) 
 figure
 fplot(f(x),[-10 10],'b')
 hold on
 fplot(g(x),[-10 10],'r')
-scatter(limf,f(limf),'r','filled')
-scatter(limg,g(limg),'k','filled')
+plot(0, 1, 'ro', 'MarkerSize', 8, 'MarkerFaceColor', 'r')%f(0)
+plot(0, 0, 'bo', 'MarkerSize', 8, 'MarkerFaceColor', 'b')%g(0)
 hold off
 grid on
 title('graphs of f(x) and g(x)')
