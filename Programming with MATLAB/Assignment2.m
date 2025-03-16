@@ -345,11 +345,12 @@ hold off
 %%
 %3(a)
 syms x y
-s=solve([x^2/16-y^2/9==1, x^2/9-y^2/16== 1], [x,y]);
-s.x
-area=int((sqrt(16*(x^2/9-1))-sqrt(9*(x^2/16-1))),0,12/5)
-display('the area is not real number so there is no area between the two hyperbolas')
-figure
+y1=sqrt((9*x.^2-144)/16)
+y2=sqrt((16*x.^2-144)/9)
+a1=int(y1,x,0,4)
+a2=int(y2,x,0,3)
+area=4*(a1-a2)
+fprintf('the area between hyperbolas is %f ',area)
 ezplot(x^2/16- y^2/9==1)
 hold on
 ezplot(x^2/9- y^2/16==1)
