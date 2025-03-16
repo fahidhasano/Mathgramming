@@ -15,7 +15,6 @@ axis on
 %%
 %1(a)(ii)
 syms t
-
 xt =  @(t)cos(t);
 yt =  @(t)sin(t);
 dxt= diff(xt,t)
@@ -26,7 +25,6 @@ fplot(xt,yt)
 title('parametric curve')
 xlabel('x')
 ylabel('y')
-
 subplot(2,1,2)
 t=linspace(0,2*pi,100)
 x=cos(t)
@@ -88,47 +86,102 @@ xlabel('x axis')
 ylabel('y axis')
 zlabel('z axis')
 %%
+clear all;close all;clc;
 %1(c)(i)
-f = @(x,y) x^2+y^2;
+syms x y
+z=x.^2+y.^2;
 figure
-fsurf(f,[-3 3],'ShowContours','on')
-hold on
-fmesh(f,[-3 3],'ShowContours','on')
-hold off
+subplot(3,1,1)
+fsurf(z)
+colorbar
+subplot(3,1,2)
+fmesh(z)
+colorbar
+subplot(3,1,3)
+fcontour(z)
+colorbar
+display('Level curve can be plotted using fsurf or fmesh or fcontour')
 %%
 %1(c)(ii)
-f = @(x,y) sqrt(16*(1-x^2/9-y^2/4));
+clear all;close all;clc;
+syms x y
+z =sqrt(16*(1-((x.^2)/9)-((y.^2)/4)));
 figure
-fsurf(f,[-3 3],'ShowContours','on')
-
-hold on
-fmesh(f,[-3 3],'ShowContours','on')
-hold on
-hold off
-
+subplot(3,1,1)
+fsurf(z)
+colorbar
+subplot(3,1,2)
+fmesh(z)
+colorbar
+subplot(3,1,3)
+fcontour(z)
+colorbar
+display('Level curve can be plotted using fsurf or fmesh or fcontour')
 %%
 %1(c)(iii)
-f = @(x,y) sqrt(x^2+y^2+1);
+syms x y
+z =sqrt(x.^2+y.^2+1);
 figure
-fsurf(f,[-3 3],'ShowContours','on')
-hold on
-fmesh(f,[-3 3],'ShowContours','on')
-hold off
-
-
-
-
-
-
-
-
-
-
-
+subplot(3,1,1)
+fsurf(z)
+colorbar
+subplot(3,1,2)
+fmesh(z)
+colorbar
+subplot(3,1,3)
+fcontour(z)
+colorbar
+display('Level curve can be plotted using fsurf or fmesh or fcontour')
 %%
 %2(i)
+clc;clear all;close all;format compact
 syms x y
-f(x,y)=x^3-3*x*y+y^3
+f(x,y)=x.^3-3.*x.*y+y.^3
+gradient(f);
+[cx,cy]=solve(gradient(f),'real',true);
+critical_points=[cx,cy];
+fx(x,y)=diff(f,x,2)
+D(x,y)=det(hessian(f))
+[x,y] = meshgrid(-5:.2:5);
+z = (x.^3-3.*x.*y+y.^3);
+[DX,DY] = gradient(z);
+figure
+quiver(x,y,DX,DY,'b')
+hold on
+C=contour(x,y,z)
+hold on
+plot(cx,cy,'o','markersize',10,'markerfacecolor','k')
+hold on
+clabel(C)
+hold on
+
+title('Gradient vector fields')
+
+xlabel('x axis')
+ylabel('y axis')
+axis on
+hold off
+legend('gradient','contour','critical points','clabel')
+for i=1:length(cx)
+    if D(cx(i),cy(i))>0 && fx(cx(i),cy(i))>0
+        fprintf('f has relative minimum at (%.2f,%.2f,%.2f)\n',cx(i),cy(i),f(cx(i),cy(i)))        
+    elseif D(cx(i),cy(i))>0 && fx(cx(i),cy(i))<0      
+        fprintf('f has relative maximum at (%.2f,%.2f,%.2f)\n',cx(i),cy(i),f(cx(i),cy(i)))
+        
+    elseif D(cx(i),cy(i))<0 
+        fprintf('f has a saddle point at (%.2f,%.2f,%.2f)\n',cx(i),cy(i),f(cx(i),cy(i)))
+        
+    elseif D(cx(i),cy(i))==0
+        fprintf('no conclusion can be drawn')
+    end
+end
+hold off
+%%
+%2(i)
+%ALTERNATIVE WAY
+clc;clear all;close all;format compact
+syms x y
+f(x,y)=x.^3-3.*x.*y+y.^3
 fx=diff(f(x,y),x)
 fy=diff(f(x,y),y)
 [xc,yc]=solve(fx, fy ,x,y,'Real',true)
@@ -182,8 +235,51 @@ hold off
 
 %%
 %2(ii)
+clc;clear all;close all;format compact
 syms x y
-f(x,y)=x^4-4*x*y+y^4
+f(x,y)=x.^4-4.*x.*y+y.^4
+gradient(f);
+[cx,cy]=solve(gradient(f),'real',true);
+critical_points=[cx,cy];
+fx(x,y)=diff(f,x,2)
+D(x,y)=det(hessian(f))
+[x,y] = meshgrid(-5:.2:5);
+z = (x.^4-4.*x.*y+y.^4);
+[DX,DY] = gradient(z);
+figure
+quiver(x,y,DX,DY,'b')
+hold on
+C=contour(x,y,z)
+hold on
+plot(cx,cy,'o','markersize',10,'markerfacecolor','k')
+hold on
+clabel(C)
+hold on
+title('Gradient vector fields')
+xlabel('x axis')
+ylabel('y axis')
+axis on
+hold off
+legend('gradient','contour','critical points','clabel')
+for i=1:length(cx)
+    if D(cx(i),cy(i))>0 && fx(cx(i),cy(i))>0
+        fprintf('f has relative minimum at (%.2f,%.2f,%.2f)\n',cx(i),cy(i),f(cx(i),cy(i)))        
+    elseif D(cx(i),cy(i))>0 && fx(cx(i),cy(i))<0      
+        fprintf('f has relative maximum at (%.2f,%.2f,%.2f)\n',cx(i),cy(i),f(cx(i),cy(i)))
+        
+    elseif D(cx(i),cy(i))<0 
+        fprintf('f has a saddle point at (%.2f,%.2f,%.2f)\n',cx(i),cy(i),f(cx(i),cy(i)))
+        
+    elseif D(cx(i),cy(i))==0
+        fprintf('no conclusion can be drawn')
+    end
+end
+hold off
+%%
+%2(ii)
+%ALTERNATIVE WAY
+syms x y
+f(x,y)=x.^4-4.*x.*y+y.^4
 fx=diff(f(x,y),x)
 fy=diff(f(x,y),y)
 [xc,yc]=solve(fx, fy ,x,y,'Real',true)
@@ -216,12 +312,9 @@ ylabel('y')
 zlabel('z')
 title('maxmin')
 alpha(.5)
-
-
 [X,Y] = meshgrid(-5:.2:5);
 Z = X.*Y.*-4.0+X.^4+Y.^4
 [DX,DY] = gradient(Z,.2,.2);
-
 figure
 C=contour(X,Y,Z)
 hold on
@@ -230,15 +323,12 @@ hold on
 clabel(C)
 hold on
 quiver(X,Y,DX,DY)
-
 title('Gradient vector fields')
 legend('contour','critical points')
 xlabel('x axis')
 ylabel('y axis')
 axis on
 hold off
-
-
 %%
 %3(b)
 syms x y
@@ -249,13 +339,9 @@ figure
 ezplot(x^2/9+ y^2/4==1)
 hold on 
 ezplot(x^2/16+ y^2/9==1)
-
 grid on
 title('Area between ellipses')
 hold off
-
-
-
 %%
 %3(a)
 syms x y
@@ -264,7 +350,6 @@ s.x
 area=int((sqrt(16*(x^2/9-1))-sqrt(9*(x^2/16-1))),0,12/5)
 display('the area is not real number so there is no area between the two hyperbolas')
 figure
-
 ezplot(x^2/16- y^2/9==1)
 hold on
 ezplot(x^2/9- y^2/16==1)
