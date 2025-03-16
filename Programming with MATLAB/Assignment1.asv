@@ -149,8 +149,7 @@ l = legend('function','growth rate','acceleration of growth or decay','maximum p
 title(l,'graph of modelling')
 
 %%
-%(3[i])
-clc;clear all;close all;
+%(3[i])clc;clear all;close all;
 syms x
 y1=exp(x)
 y2=x.^2
