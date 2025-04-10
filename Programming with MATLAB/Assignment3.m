@@ -8,14 +8,15 @@ quiver(x,y,1./L,s./L,0.5),axis tight
 hold on
 xlabel 'x', ylabel 'y'
 title 'Direction field for dy/dx=x+y'
-%%
+hold on
 syms y(x)
 p=dsolve(diff(y)==x+y,y(-1)==0)
-figure(1)
+hold on
 ezplot(p,[-6,6])
 hold on
-plot(-1,0,'r.','MarkerSize',10),axis tight 
-
+plot(-1,0,'o','MarkerSize',7,'markerfacecolor','b'),axis tight 
+legend('direction field of the DE','solution curve passing through (-1,0)','(-1,0) point')
+hold off
 %%
 %same as 1
 %Using ode45 without declaring function in another .m file
