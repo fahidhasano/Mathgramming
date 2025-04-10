@@ -3,11 +3,7 @@
 [x,y]=meshgrid(-6:0.5:6,-6:0.5:6);
 s=x+y;  %for slope function f=x+y
 L=sqrt(1+s.^2);
-figure(1)
 quiver(x,y,1./L,s./L,0.5),axis tight
-hold on
-xlabel 'x', ylabel 'y'
-title 'Direction field for dy/dx=x+y'
 hold on
 syms y(x)
 p=dsolve(diff(y)==x+y,y(-1)==0)
@@ -15,6 +11,9 @@ hold on
 ezplot(p,[-6,6])
 hold on
 plot(-1,0,'o','MarkerSize',7,'markerfacecolor','b'),axis tight 
+xlabel ('x') 
+ylabel ('y')
+title('Sketching of Direction field and solution curve for dy/dx=x+y')
 legend('direction field of the DE','solution curve passing through (-1,0)','(-1,0) point')
 hold off
 %%
