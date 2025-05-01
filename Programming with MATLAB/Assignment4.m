@@ -44,6 +44,7 @@ component_v=v-proj_w_v
 
 %%
 %3
+%using for loop
 clc;clear all
 A=[-2 3 1; 0 -4 5];
 B=[1 2 3 ;4 5 6];
@@ -81,6 +82,54 @@ disp(norm(A))
 disp('||B||')
 norm_B=sqrt(sn_B);
 disp(norm(B))
+%%
+%using while loop
+clc;clear all;close all
+A=[-2 3 1; 0 -4 5];
+B=[1 2 3 ;4 5 6];
+s=0;
+i=1;
+while i<=2
+    j=1   ; 
+    while j<=3
+       s=s+A(i,j).*B(i,j);
+       j=j+1;
+    end
+    i=i+1 ;   
+end
+disp('dot product:')
+disp(s)
+if s==sum(dot(A,B))
+    display('verified')
+end
+
+sn_A=0;
+sn_B=0;
+i=1;
+while i<=2
+    j=1;
+    while j<=3
+        sn_A=sn_A+A(i,j).*A(i,j);
+        j=j+1;                
+    end
+    i=i+1;     
+end
+i=1;
+while i<=2
+    j=1;
+    while j<=3
+        sn_B=sn_B+B(i,j).*B(i,j);        
+         j=j+1;     
+    end
+   i=i+1;   
+end
+norm_A=sqrt(sn_A);
+disp('||A||')
+disp(norm(A))
+disp('||B||')
+norm_B=sqrt(sn_B);
+disp(norm(B))
+
 %%
 %4
 clc;clear all
