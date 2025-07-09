@@ -138,7 +138,7 @@ u=zeros(length(v));
 u(1,:)=v(1,:)./norm(v(1,:));
 for i=2:length(v)
     u(i,:)=v(i,:);
-    for j=1:length(v)-1
+    for j=1:i-1
         
         u(i,:)=u(i,:)-(dot(u(i,:),u(j,:))).*u(j,:);
     end
