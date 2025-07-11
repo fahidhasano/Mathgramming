@@ -42,7 +42,7 @@ subroutine bubble_sort
         write(*,*) a(i)
     end do
 end subroutine
-!All odd positive integers<100 and not divisible by 7 so that there are 4 numbers a line
+!All odd positive integers <100 and not divisible by 7 so that there are 4 numbers a line
 subroutine array
     implicit none
     integer:: i,c=0
@@ -58,8 +58,28 @@ subroutine array
         end if
     end do
 end subroutine
+! Print the even positive integers from 1 to N>60 with 5 numbers to a line :(similar to the previous)
+subroutine array2
+    implicit none
+    integer:: i,c=0,n
+    write(*,*) "Enter the last number greater than 60:"
+    read(*,*) n
+    if (n>60) then
+            do i=1,n
+                if(mod(i,2)==0) then
+                    c=c+1
+                    write(*,'(i20)',advance='No') i
 
+                end if
+                if (c==5) then
+                    write(*,*)
+                    c=0
+                end if
+            end do
+    end if
+
+end subroutine
 program subroutine_test
     !call your desired subroutine
-    call bubble_sort
+    call array2
 end program
