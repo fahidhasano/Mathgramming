@@ -7,7 +7,7 @@ a=input('Enter lower limit:\n')
 b=input('Enter upper limit:\n')
 e=input('Enter tolerance:\n')
 if f(a)*f(b)>0
-    disp('Error: Invalid solution and no middle point found')
+    disp('Error: No solution')
 elseif f(a)*f(b)<0
     fprintf('\n\na\t\t\tb\t\t\tc\t\t\tf(c)\n')
     c=(a+b)/2;   
