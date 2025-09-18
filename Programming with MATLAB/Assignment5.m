@@ -172,7 +172,7 @@ fprintf('the value of f(x) at %f is %f\n',x1,fx)
 clc;clear all;close all
 %3
 syms f(x)
-f(x)=0.5.*x*exp(0.1.*x.^2);
+f(x)=0.5.*x.*exp(0.1.*x.^2);
 x=[0 0.5 1.0 1.5 2.0];
 xp=1.25;
 y = double(f(x));
