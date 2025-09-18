@@ -124,17 +124,6 @@ elseif fx0*fx1<0
     end
 fprintf('result is :%.8f\n',x2)    
 end
-
-%%
-clc;clear all;close all
-%3
-syms f(x)
-f(x)=0.5.*x*exp(0.1.*x.^2);
-x=[0 0.5 1.0 1.5 2.0];
-xp=1.25;
-y = double(f(x));
-%From lagrange_interpolation.m file:
-lagrange_interpolation(f,y,x,xp)
 %%
 clc;clear all;close all
 %2
@@ -151,18 +140,45 @@ for j=3:n+1
         end
     end
 end
+if 1.0<=x1<=1.40
+    p=(x1-y(1,1))/(y(2,1)-y(1,1));
 %y
-p=(x1-y(n,1))/(y(2,1)-y(1,1));
 fx=0;
 for i=0:n-1
     pro=1.;
     for j=1:i
-        pro=pro*(p+j-1);
+        pro=pro*(p+j-1)
     end
     pro=pro/factorial(i);
+    fx=fx+pro*y(1,i+2);
+end
+end
+if 1.60<=x1<=2.00
+    p=(x1-y(n,1))/(y(2,1)-y(1,1));
+%y
+fx=0;
+for i=0:n-1
+    pro=1.;
+    for j=1:i
+        pro=pro*(p+j-1)
+    end
+    pro=pro/factorial(i);
+    
     fx=fx+pro*y(n,i+2);
 end
+end
 fprintf('the value of f(x) at %f is %f\n',x1,fx)
+%%
+clc;clear all;close all
+%3
+syms f(x)
+f(x)=0.5.*x*exp(0.1.*x.^2);
+x=[0 0.5 1.0 1.5 2.0];
+xp=1.25;
+y = double(f(x));
+%From lagrange_interpolation.m file:
+lagrange_interpolation(f,y,x,xp)
+
 %%
 %4(i)
 %Trapezoidal rule
