@@ -95,7 +95,7 @@ legend('y_1','y_2')
 %Using dsolve command
 syms  y(x)
 Dy = diff(y);
-p=dsolve(diff(y, 2) == 4*diff(y,1)-3*y+9*x.^2+4, y(0) == 1, Dy(0) == 8)
+p=dsolve(diff(y, 2) == 4*diff(y,1)-3*y+9*x.^2+4, y(0) == 6, Dy(0) == 8)
 ezplot(p,[0, 20])
 %%
 %5
