@@ -133,6 +133,7 @@ subroutine fixed_point
 
 
 end subroutine
+!3.
 subroutine chebychev
     implicit none
     real:: x=2,y,tol=0.001
@@ -154,7 +155,7 @@ subroutine chebychev
 
 end subroutine
 
-
+!4.
 subroutine newton_raphson_i
     implicit none
     real:: x=2,y,tol=0.001
@@ -212,6 +213,8 @@ subroutine newton_raphson_iii
     f=x*(2.0-a*x)
     end function
 end subroutine
+
+! in the program below, you can call any subroutine program by mentioning the subroutine's name after call command
 program call_subroutine
     implicit none
     call chebychev
