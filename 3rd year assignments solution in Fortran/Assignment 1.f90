@@ -3,8 +3,8 @@
 subroutine bisection
     implicit none
     real:: x0=-5.0,x1=5.0 ,y1,y0,x2,tol=0.001,y2
-    y0=f(x0) !rough
-    y1=f(x1) !rough
+    y0=f(x0)
+    y1=f(x1)
     if (y0*y1<0.0) then
     x2=(x0+x1)/2.0
     y2=f(x2)
