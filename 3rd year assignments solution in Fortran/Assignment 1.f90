@@ -195,7 +195,7 @@ subroutine newton_raphson_ii
 end subroutine
 subroutine newton_raphson_iii
     implicit none
-    real:: x=0.2,y,tol=0.001
+    real:: x=0.2,y,tol=0.001 ! it's better to use x=0.2 for inverse
     integer:: i,Maxiter=200
     do i=1, Maxiter
         y=f(x)
