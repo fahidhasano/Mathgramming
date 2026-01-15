@@ -102,37 +102,99 @@ end subroutine
 
 ! 2.
 !NOTE: ONLY SECOND FUNCTION (PHI 2) WILL CONVERGE OR SOLUTION EXIST, SO ONLY PHI 2 HAVE SOLUTION
-subroutine fixed_point
+!HOW TO CHECK: |f'(x) WRT X|<1 where x is the initial value
+subroutine fixed_point_i
     implicit none
     real::  x=2,y, tol=0.001
     integer:: i, Max_iter=100
+    if (abs(dphi1(x))<1) then
+    do i=1, Max_iter
+        y=phi1(x)
+        if (abs(y-x)<tol) exit
+        x=y
+    end do
+    write(*,*) y, i
+    else
+        print*, 'no convergence'
+    end if
+    contains
+
+    function phi1(x)
+        implicit none
+        real:: phi1,x
+        phi1=((x**3.0)-5.0)/2.0
+    end function
+    function dphi1(x)
+        implicit none
+        real:: dphi1,x
+        dphi1=(3.0/2.0)*(x**2.0)
+    end function
+
+end subroutine
+subroutine fixed_point_ii
+    implicit none
+    real::  x=2,y, tol=0.001
+    integer:: i, Max_iter=100
+    if (abs(dphi2(x))<1) then
     do i=1, Max_iter
         y=phi2(x)
         if (abs(y-x)<tol) exit
         x=y
     end do
     write(*,*) y, i
+    else
+        print*, 'no convergence'
+    end if
     contains
-    function phi1(x)
-        implicit none
-        real:: phi1,x
-        phi1=((x**3.0)-5.0)/2.0
-    end function
+
     function phi2(x)
         implicit none
         real:: phi2,x
         phi2=(2.0*x+5.0)**(1.0/3.0)
     end function
+    function dphi2(x)
+        implicit none
+        real:: dphi2,x
+        dphi2=(2.0/3.0)*(2.0*x+5.0)**(-2.0/3.0)
+    end function
+
+end subroutine
+
+subroutine fixed_point_iii
+    implicit none
+    real::  x=2,y, tol=0.001
+    integer:: i, Max_iter=100
+    if (abs(dphi3(x))<1) then
+    do i=1, Max_iter
+        y=phi3(x)
+        if (abs(y-x)<tol) exit
+        x=y
+    end do
+    write(*,*) y, i
+    else
+        print*, 'no convergence'
+    end if
+    contains
 
     function phi3(x)
         implicit none
         real:: phi3,x
         phi3=(2.0*x+5.0)/x**2.0
     end function
-
-
+    function dphi3(x)
+        implicit none
+        real:: dphi3,x
+        dphi3=((-2.0*x-10.0)/(x**3.0))
+    end function
 
 end subroutine
+
+
+
+
+
+
+
 !3.
 subroutine chebychev
     implicit none
@@ -217,7 +279,7 @@ end subroutine
 ! in the program below, you can call any subroutine program by mentioning the subroutine's name after call command
 program call_subroutine
     implicit none
-    call chebychev
+    call fixed_point_ii
 end program
 
 
