@@ -30,7 +30,7 @@ program Newtons_Method
         y_old=y_new
     end do
     print*, "Solution:"
-    WRITE(*, '(f 6.3, f 6.3)') x_new, y_old
+    WRITE(*, '(f 6.3, f 6.3)') x_new, y_new
 
 end program
 
