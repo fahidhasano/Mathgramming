@@ -14,7 +14,7 @@ program gauss_seidel
     do k=1, Max_it
         x_new=(11.0+3.0*y_old-2.0*z_old)/8.0
         y_new=(14.0-6.0*x_new-3.0*z_old)/5.0
-        z_new=(21.0-10.0*x_new+7.0*y_new)/(-8.0)
+        z_new=(-21.0+10.0*x_new-7.0*y_new)/(8.0)
         if (max(abs(x_new-x_old),abs(y_new-y_old),abs(z_new-z_old))<tol) goto 2
         x_old=x_new
         y_old=y_new
