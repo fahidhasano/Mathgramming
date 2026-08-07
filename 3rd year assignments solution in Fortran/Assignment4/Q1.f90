@@ -1,3 +1,5 @@
+! Algorithm based on Burden's Numerical analysis book 9th edition page 681
+
 program shooting_method
     implicit none
     integer,parameter :: N=10

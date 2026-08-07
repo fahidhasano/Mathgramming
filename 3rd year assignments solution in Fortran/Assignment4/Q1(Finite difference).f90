@@ -1,3 +1,4 @@
+! Algorithm based on Burden's Numerical analysis book 9th edition page 687
 program finite_difference
     implicit none
     integer,parameter:: N=10
