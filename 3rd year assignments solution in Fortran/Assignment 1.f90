@@ -27,8 +27,8 @@ subroutine bisection
     elseif(y0*y1>0.0) then
         write(*,*) 'No solution exists'
         else
-            if (y0==0.0 ) print*, y0
-            if (y1==0.0 ) print*, y1
+            if (y0==0.0 ) print*, x0
+            if (y1==0.0 ) print*, x1
 
     end if
 
